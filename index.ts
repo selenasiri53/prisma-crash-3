@@ -101,7 +101,10 @@ async function main() {
     //         id: 2,
     //     },
     // })
+
     console.log(articles)
+    // Run: npx prisma studio
+    // view data in local
 }
 
 main()
