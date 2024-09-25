@@ -13,28 +13,31 @@ async function main() {
     // console.log(user);
 
     // Get all users
-    // const users = await prisma.user.findMany();
-    //console.log(users);
+    const users = await prisma.user.findMany({
+        include: {
+            articles: true,
+        }
+    });
+    // console.log(users);
 
     // Create article and associate it with user
-    // const article = await prisma.article.create({
-    //     data: {
-    //         title: 'Johns First Article',
-    //         body: 'Johns First article body',
-    //         // based on the relation created in article model
-    //         author: {
-    //             connect: {
-    //                 id: 1,
-    //             },
-    //         },
-    //     },
-    // });
+    const article = await prisma.article.create({
+        data: {
+            title: 'Johns First Article',
+            body: 'Johns First article body',
+            // based on the relation created in article model
+            author: {
+                connect: {
+                    id: 1,
+                },
+            },
+        },
+    });
 
     // console.log(article)
 
     // Get all articles
     const articles = await prisma.article.findMany()
-
     // console.log(articles)
 
     // create a user + article & associate them
@@ -52,8 +55,33 @@ async function main() {
     // });
     // console.log(user)
 
-    console.log(articles)
+    // console.log(articles)
 
+    // Create another article:
+    // const article = await prisma.article.create({
+    //     data: {
+    //         title: 'Sample Article',
+    //         body: 'This is a sample article',
+    //         author: {
+    //             connect: {
+    //                 id: 2,
+    //             }
+    //         }
+    //     }
+    // })
+
+    // console.log(articles)
+
+    // Loop over Saras articles
+    users.forEach((user) => {
+        console.log(`User: ${user.name}, Email: ${user.email}`);
+        console.log('Articles:');
+        user.articles.forEach((article) => {
+            console.log(`- Title: ${article.title}, Body: ${article.body}`);
+        })
+
+        console.log('\n');
+    })
 }
 
 main()
