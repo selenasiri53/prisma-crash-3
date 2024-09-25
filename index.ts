@@ -21,24 +21,24 @@ async function main() {
     // console.log(users);
 
     // Create article and associate it with user
-    const article = await prisma.article.create({
-        data: {
-            title: 'Johns First Article',
-            body: 'Johns First article body',
-            // based on the relation created in article model
-            author: {
-                connect: {
-                    id: 1,
-                },
-            },
-        },
-    });
+    // const article = await prisma.article.create({
+    //     data: {
+    //         title: 'Johns First Article',
+    //         body: 'Johns First article body',
+    //         // based on the relation created in article model
+    //         author: {
+    //             connect: {
+    //                 id: 1,
+    //             },
+    //         },
+    //     },
+    // });
 
     // console.log(article)
 
     // Get all articles
     const articles = await prisma.article.findMany()
-    // console.log(articles)
+    console.log(articles)
 
     // create a user + article & associate them
     // const user = await prisma.user.create({
@@ -84,16 +84,24 @@ async function main() {
     // })
 
     // Update data
-    const user = await prisma.user.update({
-        where: {
-            id: 1
-        },
-        data: {
-            name: 'John Doe Jr.'
-        }
-    });
+    // const user = await prisma.user.update({
+    //     where: {
+    //         id: 1
+    //     },
+    //     data: {
+    //         name: 'John Doe Jr.'
+    //     }
+    // });
 
-    console.log(user);
+    // console.log(user);
+
+    // Remove data
+    // const article = await prisma.article.delete({
+    //     where: {
+    //         id: 2,
+    //     },
+    // })
+    console.log(articles)
 }
 
 main()
